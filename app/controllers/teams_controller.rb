@@ -50,8 +50,10 @@ class TeamsController < ApplicationController
 
   def change_owner
     @team.owner_id = params[:new_owner_id]
+    new_owner = User.find(params[:new_owner_id])
     @team.save!
-    
+    TeamMailer.change_owner_mail(@team, new_owner).deliver
+    redirect_to @team, notice: I18n.t('views.messages.change_owner_complete')
   end
 
   private
