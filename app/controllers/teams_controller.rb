@@ -1,7 +1,7 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_team, only: %i[show edit update destroy]
-  before_action :owner_only, only: %i[edit]
+  before_action :set_team, only: %i[show edit update destroy change_owner]
+  before_action :owner_only, only: %i[edit change_owner]
 
   def index
     @teams = Team.all
@@ -48,6 +48,12 @@ class TeamsController < ApplicationController
     @team = current_user.keep_team_id ? Team.find(current_user.keep_team_id) : current_user.teams.first
   end
 
+  def change_owner
+    @team.owner_id = params[:new_owner_id]
+    @team.save!
+    
+  end
+
   private
 
   def set_team
@@ -60,7 +66,7 @@ class TeamsController < ApplicationController
 
   def owner_only
     if current_user != @team.owner
-      redirect_to @team, notice: I18n.t('views.messages.only_owner_can_edit')
+      redirect_to @team, notice: I18n.t('views.messages.only_owner_can_do')
     end
   end
 end
