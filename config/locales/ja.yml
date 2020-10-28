@@ -223,6 +223,8 @@ ja:
       delete_team: 'チーム削除に成功しました！'
       update_profile: 'プロフィールを編集しました！'
       complete_registration: '登録完了'
+      cannnot_delete_agenda: 'アジェンダを削除できませんでした'
+      delete_agenda_completed: 'アジェンダの削除が完了しました'
       edit_article: '記事を編集する'
       input_title: '記事タイトルを入力してください'
       input_content: '内容を入力してください'

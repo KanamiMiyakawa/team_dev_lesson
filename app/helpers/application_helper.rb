@@ -23,4 +23,10 @@ module ApplicationHelper
       article_path(article)
     end
   end
+
+  def agenda_delete_btn_appearence(agenda)
+    if current_user == agenda.user || current_user == agenda.team.owner
+      link_to I18n.t('views.button.delete'), agenda_path(agenda.id), method: :delete
+    end
+  end
 end
