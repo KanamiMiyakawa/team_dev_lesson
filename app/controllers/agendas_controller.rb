@@ -24,9 +24,7 @@ class AgendasController < ApplicationController
 
   def destroy
     @agenda.destroy!
-    @agenda.team.members.each do |member|
-      AgendaMailer.delete_agenda_mail(@agenda,member).deliver
-    end
+    AgendaMailer.delete_agenda_mail(@agenda,@agenda.team).deliver
     redirect_to dashboard_url, notice: I18n.t('views.messages.delete_agenda_completed')
   end
 
