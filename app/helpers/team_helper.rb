@@ -4,7 +4,7 @@ module TeamHelper
   end
 
   def only_the_user_or_owner_can_delete(team,assign)
-    if current_user.id == assign.user_id || current_user == team.owner
+    if (current_user.id == assign.user_id || current_user == team.owner) && assign.user_id != team.owner.id
       link_to I18n.t('views.button.delete'), team_assign_path(team, assign), method: :delete, class: 'btn btn-sm btn-danger'
     end
   end
